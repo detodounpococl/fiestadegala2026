@@ -10,12 +10,12 @@
 /* ─── RESET & VARIABLES ───────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0a0f;--s0:#130d13;--s1:#1a1020;--s2:#1f1325;
-  --bd:#2d1a30;--bd2:#3d2542;
-  --gold:#e879a8;--gold2:#f9a8d4;--cream:#fce7f3;
+  --bg:#0e0814;--s0:#150d1a;--s1:#1c1126;--s2:#22142e;
+  --bd:#3d1f4a;--bd2:#5a2d6e;
+  --gold:#f72585;--gold2:#ff85c8;--cream:#ffe4f5;
   --green:#6ee7b7;--red:#fca5a5;--yellow:#fde68a;--blue:#93c5fd;
   --purple:#a78bfa;
-  --txt:#f0e0ef;--muted:#6b6880;--muted2:#9490a8;
+  --txt:#f5e6f8;--muted:#7a5f8a;--muted2:#b89acc;
   --r:12px;
 }
 html{scroll-behavior:smooth}
@@ -35,13 +35,13 @@ body{
 }
 .hdr-glow{
   position:absolute;width:700px;height:220px;
-  background:radial-gradient(ellipse,#e879a830 0%,#c084fc12 60%,transparent 80%);
+  background:radial-gradient(ellipse,#f7258518 0%,transparent 70%);
   top:0;left:50%;transform:translateX(-50%);
   pointer-events:none;
 }
 .hdr-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:#e879a80f;border:1px solid #e879a830;
+  background:#f725850f;border:1px solid #f7258530;
   color:var(--gold);font-size:10px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;
   padding:5px 16px;border-radius:100px;margin-bottom:14px;
@@ -86,8 +86,8 @@ body{
 }
 .tab-btn:hover{color:var(--txt);background:var(--s1)}
 .tab-btn.act{
-  background:linear-gradient(135deg,#e879a818,#e879a806);
-  color:var(--gold2);border:1px solid #e879a828;
+  background:linear-gradient(135deg,#f7258518,#f7258506);
+  color:var(--gold2);border:1px solid #f7258528;
 }
 
 /* ─── LAYOUT ───────────────────────────────────────────────────────── */
@@ -104,7 +104,7 @@ body{
 
 /* ─── CARDS ────────────────────────────────────────────────────────── */
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:22px}
-.card-hint{background:#e879a808;border-color:#e879a822}
+.card-hint{background:#f7258508;border-color:#f7258522}
 
 .kpi{
   background:var(--s1);border:1px solid var(--bd);
@@ -203,7 +203,7 @@ tr:hover td{background:#ffffff03}
 /* ─── BIG NUMBER ───────────────────────────────────────────────────── */
 .big{
   font-family:'Playfair Display',serif;font-size:40px;font-weight:900;
-  background:linear-gradient(135deg,var(--gold2),#f8bbea);
+  background:linear-gradient(135deg,var(--gold2),#ffb3e6,var(--cream));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;line-height:1;
 }
@@ -291,7 +291,7 @@ tr:hover td{background:#ffffff03}
 }
 .cd-num{
   font-family:'Playfair Display',serif;font-size:36px;font-weight:900;
-  background:linear-gradient(135deg,var(--gold2),#f8bbea);
+  background:linear-gradient(135deg,var(--gold2),#ffb3e6,var(--cream));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;line-height:1;
   animation:cdPop .1s ease;
@@ -383,7 +383,23 @@ tr:hover td{background:#ffffff03}
 }
 .footer a{color:var(--gold);text-decoration:none}
 .footer a:hover{text-decoration:underline}
+
+/* ─── EXPORT BUTTONS ──────────────────────────────────────────────── */
+.btn-excel{border-color:#6ee7b740 !important;color:#6ee7b7 !important}
+.btn-excel:hover{background:#6ee7b715 !important;border-color:#6ee7b7 !important}
+.btn-pdf{border-color:#ff85c840 !important;color:#ff85c8 !important}
+.btn-pdf:hover{background:#ff85c815 !important;border-color:#ff85c8 !important}
+.btn-print{border-color:#93c5fd40 !important;color:#93c5fd !important}
+.btn-print:hover{background:#93c5fd15 !important;border-color:#93c5fd !important}
+@media print{
+  .tab-bar,.clock-bar,.hdr-badge,.save-dot,.btn,.btn-export,#toast,#modal-bg{display:none!important}
+  .tab-panel{display:flex!important}
+  body{background:#fff!important;color:#000!important}
+}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -399,8 +415,7 @@ tr:hover td{background:#ffffff03}
 <!-- ══ CLOCK BAR ════════════════════════════════════════════════════ -->
 <div class="clock-bar">
   <div class="clock-author">
-    Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
-    <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a>
+    Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> · <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a>
   </div>
   <div class="clock-time" id="reloj-display">cargando...</div>
 </div>
@@ -413,8 +428,9 @@ tr:hover td{background:#ffffff03}
   <button class="tab-btn" onclick="showTab('fondos')">◉ Años Anteriores</button>
   <button class="tab-btn" onclick="showTab('meta')">◐ Meta Fiesta</button>
   <div style="margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-    <button class="btn-export btn-importar" onclick="importarJSON()" title="Cargar datos desde un archivo .json">⬆ Importar JSON</button>
-    <button class="btn-export btn-exportar" onclick="exportarJSON()" title="Descargar todos los datos como .json">⬇ Exportar JSON</button>
+    <button class="btn-export btn-excel" onclick="exportarExcel()" title="Descargar como Excel">📊 Excel</button>
+    <button class="btn-export btn-pdf"   onclick="exportarPDF()"   title="Guardar como PDF">📄 PDF</button>
+    <button class="btn-export btn-print" onclick="window.print()"  title="Imprimir">🖨️ Imprimir</button>
   </div>
 </div>
 
@@ -590,8 +606,7 @@ tr:hover td{background:#ffffff03}
 
 <!-- ══ FOOTER ═══════════════════════════════════════════════════════ -->
 <div class="footer">
-  Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
-  <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a><br>
+  Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> · <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a><br>
   Liceo Marta Brunet · 4° Medio · Fondo Fiesta de Gala
 </div>
 
@@ -1071,7 +1086,7 @@ function renderCountdown() {
       <div style="text-align:center;padding:24px">
         <div style="font-size:56px;margin-bottom:12px">🥂</div>
         <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;
-          background:linear-gradient(135deg,var(--gold2),#f8bbea);
+          background:linear-gradient(135deg,var(--gold2),#ffb3e6,var(--cream));
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
           ¡Felicidades, llegó la Fiesta de Gala!
         </div>
@@ -1168,9 +1183,9 @@ function renderBalance() {
       txt:'⚡ ¡Un cuarto del camino recorrido! El equipo está demostrando que puede. ¡No paren!' },
     { pct:0.4, color:'var(--yellow)', bg:'#fde68a12', border:'#fde68a30',
       txt:'🔥 ¡Ya van casi a la mitad! La balanza se está inclinando a su favor. ¡Más fuerza!' },
-    { pct:0.5, color:'var(--gold2)', bg:'#e879a812', border:'#e879a830',
+    { pct:0.5, color:'var(--gold2)', bg:'#f7258512', border:'#f7258530',
       txt:'⚖️ ¡Equilibrio perfecto! Están exactamente a la mitad. ¡El impulso final llegará!' },
-    { pct:0.65,color:'var(--gold2)', bg:'#e879a812', border:'#e879a830',
+    { pct:0.65,color:'var(--gold2)', bg:'#f7258512', border:'#f7258530',
       txt:'✨ ¡Más de la mitad! La fiesta ya se puede oler en el ambiente. ¡Un último empujón!' },
     { pct:0.8, color:'var(--green)',  bg:'#6ee7b712', border:'#6ee7b730',
       txt:'🎯 ¡Increíble! Están muy cerca de la meta. La gala los espera con los brazos abiertos.' },
@@ -1223,7 +1238,7 @@ function renderResumen() {
 
   // KPI row
   document.getElementById('kpi-row').innerHTML = [
-    {lbl:'Total Acumulado',    val:fmt(T.grandTotal),  sub:'Fondos anteriores + ventas',              c:'#e879a8'},
+    {lbl:'Total Acumulado',    val:fmt(T.grandTotal),  sub:'Fondos anteriores + ventas',              c:'#f72585'},
     {lbl:'Fondos Anteriores',  val:fmt(T.prevTotal),   sub:'1° a 3° Medio',                           c:'#a78bfa'},
     {lbl:'Ganancia Ventas',    val:fmt(T.netProfit),   sub:`${data.sales.length} ventas registradas`, c:'#6ee7b7'},
     {lbl:'Productos activos',  val:data.products.length, sub:`${data.products.reduce((s,p)=>s+Math.max(0,Math.floor(parseFloat(p.qty)||0)-data.sales.filter(v=>v.productId===p.id).reduce((a,v)=>a+(parseFloat(v.qty)||0),0)),0)} uds. en stock`, c:'#93c5fd'},
@@ -1325,7 +1340,7 @@ function renderProductos() {
   document.getElementById('product-kpis').innerHTML = [
     {lbl:'Inversión total en productos',    val:fmt(totalInvest),  c:'#fca5a5'},
     {lbl:'Stock restante (valor de venta)', val:fmt(totalPotenti), c:'#93c5fd'},
-    {lbl:'Tipos de productos',               val:data.products.length + ' tipos', c:'#e879a8'},
+    {lbl:'Tipos de productos',               val:data.products.length + ' tipos', c:'#f72585'},
   ].map(k => `
     <div class="kpi">
       <div class="kpi-line" style="background:${k.c}"></div>
@@ -1382,7 +1397,7 @@ function renderVentas() {
   document.getElementById('sales-kpis').innerHTML = [
     {lbl:'Total ingresos por ventas', val:fmt(T.totalRevenue),  c:'#6ee7b7'},
     {lbl:'Costo de lo vendido',       val:fmt(T.totalCostSold), c:'#fca5a5'},
-    {lbl:'Ganancia neta de ventas',   val:fmt(T.netProfit),     c:'#e879a8'},
+    {lbl:'Ganancia neta de ventas',   val:fmt(T.netProfit),     c:'#f72585'},
   ].map(k => `
     <div class="kpi">
       <div class="kpi-line" style="background:${k.c}"></div>
@@ -1557,6 +1572,163 @@ function iniciarApp() {
   }, 1000);
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPORTAR EXCEL
+   ═══════════════════════════════════════════════════════════════════ */
+function exportarExcel() {
+  try {
+    const wb = XLSX.utils.book_new();
+
+    // Hoja Productos
+    const prodRows = [['Producto','Comprados','Precio Compra','Precio Venta','Ganancia c/u']];
+    data.products.forEach(p => prodRows.push([
+      p.name, Number(p.qty)||0, Number(p.buyPrice)||0,
+      Number(p.sellPrice)||0, (Number(p.sellPrice)||0)-(Number(p.buyPrice)||0)
+    ]));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(prodRows), 'Productos');
+
+    // Hoja Ventas
+    const ventRows = [['Producto','Cantidad','Precio Venta','Total','Fecha']];
+    data.sales.forEach(s => {
+      const p = data.products.find(x => x.id === s.productId);
+      ventRows.push([p?.name||'Eliminado', Number(s.qty)||0,
+        Number(p?.sellPrice)||0, (Number(s.qty)||0)*(Number(p?.sellPrice)||0), s.date]);
+    });
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(ventRows), 'Ventas');
+
+    // Hoja Fondos
+    const fondRows = [['Año','Monto']];
+    data.previousFunds.forEach(f => fondRows.push([f.year, Number(f.amount)||0]));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(fondRows), 'Fondos Años');
+
+    // Hoja Resumen
+    const T = calcTotals();
+    const resRows = [['Indicador','Valor'],
+      ['Meta Fiesta', T.goal], ['Total Acumulado', T.grandTotal],
+      ['Fondos Anteriores', T.prevTotal], ['Ganancia Ventas', T.netProfit],
+      ['Progreso (%)', T.progress.toFixed(1)], ['Fecha Evento', data.eventDate||'—']
+    ];
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(resRows), 'Resumen');
+
+    const fecha = new Date().toLocaleDateString('es-CL').replace(/\//g,'-');
+    XLSX.writeFile(wb, `fondo-gala-${fecha}.xlsx`);
+    toast('✓ Excel descargado', 'ok');
+  } catch(e) { toast('Error al generar Excel', 'err'); console.error(e); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPORTAR PDF
+   ═══════════════════════════════════════════════════════════════════ */
+function exportarPDF() {
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+    const T   = calcTotals();
+    const fecha = new Date().toLocaleDateString('es-CL');
+
+    // Encabezado
+    doc.setFillColor(247,37,133);
+    doc.rect(0,0,210,28,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(18); doc.setFont('helvetica','bold');
+    doc.text('Fondo Fiesta de Gala', 105, 12, {align:'center'});
+    doc.setFontSize(11); doc.setFont('helvetica','normal');
+    doc.text('Liceo Marta Brunet · 4° Medio', 105, 20, {align:'center'});
+
+    // Fecha
+    doc.setTextColor(100,100,100); doc.setFontSize(9);
+    doc.text(`Generado: ${fecha}`, 195, 35, {align:'right'});
+
+    // KPIs
+    doc.setTextColor(247,37,133); doc.setFontSize(13); doc.setFont('helvetica','bold');
+    doc.text('Resumen General', 14, 42);
+    doc.autoTable({
+      startY: 46,
+      head: [['Indicador','Valor']],
+      body: [
+        ['Meta Fiesta', `$${Math.round(T.goal).toLocaleString('es-CL')}`],
+        ['Total Acumulado', `$${Math.round(T.grandTotal).toLocaleString('es-CL')}`],
+        ['Fondos Años Anteriores', `$${Math.round(T.prevTotal).toLocaleString('es-CL')}`],
+        ['Ganancia por Ventas', `$${Math.round(T.netProfit).toLocaleString('es-CL')}`],
+        ['Progreso hacia la meta', `${T.progress.toFixed(1)}%`],
+        ['Fecha del Evento', data.eventDate || '—'],
+      ],
+      headStyles:{fillColor:[247,37,133], textColor:255, fontStyle:'bold'},
+      alternateRowStyles:{fillColor:[255,235,248]},
+      margin:{left:14,right:14},
+    });
+
+    // Productos
+    if (data.products.length) {
+      doc.setTextColor(247,37,133); doc.setFontSize(13); doc.setFont('helvetica','bold');
+      doc.text('Productos', 14, doc.lastAutoTable.finalY + 12);
+      doc.autoTable({
+        startY: doc.lastAutoTable.finalY + 16,
+        head: [['Producto','Cant.','P.Compra','P.Venta','Ganancia c/u']],
+        body: data.products.map(p => [
+          p.name, p.qty,
+          `$${Math.round(Number(p.buyPrice)||0).toLocaleString('es-CL')}`,
+          `$${Math.round(Number(p.sellPrice)||0).toLocaleString('es-CL')}`,
+          `$${Math.round((Number(p.sellPrice)||0)-(Number(p.buyPrice)||0)).toLocaleString('es-CL')}`
+        ]),
+        headStyles:{fillColor:[181,23,158], textColor:255, fontStyle:'bold'},
+        alternateRowStyles:{fillColor:[255,235,248]},
+        margin:{left:14,right:14},
+      });
+    }
+
+    // Ventas
+    if (data.sales.length) {
+      doc.setTextColor(247,37,133); doc.setFontSize(13); doc.setFont('helvetica','bold');
+      doc.text('Ventas Registradas', 14, doc.lastAutoTable.finalY + 12);
+      doc.autoTable({
+        startY: doc.lastAutoTable.finalY + 16,
+        head: [['Producto','Cant.','Total','Fecha']],
+        body: data.sales.map(s => {
+          const p = data.products.find(x=>x.id===s.productId);
+          return [p?.name||'Eliminado', s.qty,
+            `$${Math.round((Number(s.qty)||0)*(Number(p?.sellPrice)||0)).toLocaleString('es-CL')}`,
+            s.date];
+        }),
+        headStyles:{fillColor:[181,23,158], textColor:255, fontStyle:'bold'},
+        alternateRowStyles:{fillColor:[255,235,248]},
+        margin:{left:14,right:14},
+      });
+    }
+
+    // Footer
+    const pags = doc.internal.getNumberOfPages();
+    for(let i=1;i<=pags;i++){
+      doc.setPage(i);
+      doc.setFontSize(8); doc.setTextColor(150,150,150);
+      doc.text('Rodrigo Villalobos R. · rodrigovillalobos1978@gmail.com', 105, 290, {align:'center'});
+    }
+
+    const fechaFile = fecha.replace(/\//g,'-');
+    doc.save(`fondo-gala-${fechaFile}.pdf`);
+    toast('✓ PDF descargado', 'ok');
+  } catch(e) { toast('Error al generar PDF', 'err'); console.error(e); }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    ARRANQUE — cargar localStorage y arrancar directamente
-   ═════════════════════════════════════════�
+   ═══════════════════════════════════════════════════════════════════ */
+(async () => {
+  // Intentar recuperar archivo de sesión anterior (IndexedDB)
+  const recovered = await intentarRecuperarHandle();
+  if (recovered) { iniciarApp(); return; }
+  // Cargar desde localStorage si hay datos guardados
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      data = { ...DEFAULT, ...parsed };
+    }
+  } catch {}
+  setStatus('local');
+  iniciarApp();
+})();
+</script>
+</body>
+</html>
