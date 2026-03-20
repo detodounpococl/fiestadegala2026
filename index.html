@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Fondo Gala · Liceo Marta Brunet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ─── RESET & VARIABLES ───────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -35,7 +35,7 @@ body{
 }
 .hdr-glow{
   position:absolute;width:700px;height:220px;
-  background:radial-gradient(ellipse,#e879a818 0%,transparent 70%);
+  background:radial-gradient(ellipse,#e879a830 0%,#c084fc12 60%,transparent 80%);
   top:0;left:50%;transform:translateX(-50%);
   pointer-events:none;
 }
@@ -314,7 +314,7 @@ tr:hover td{background:#ffffff03}
   background:linear-gradient(to bottom,var(--gold2),var(--gold));
   border-radius:4px;
   position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  box-shadow:0 0 20px var(--gold)66;
+  box-shadow:0 0 20px var(--gold)44;
 }
 .scale-pivot::before{
   content:'';position:absolute;
@@ -398,9 +398,11 @@ tr:hover td{background:#ffffff03}
 
 <!-- ══ CLOCK BAR ════════════════════════════════════════════════════ -->
 <div class="clock-bar">
- <div class="clock-author">
-  Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
-  <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a>
+  <div class="clock-author">
+    Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
+    <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a>
+  </div>
+  <div class="clock-time" id="reloj-display">cargando...</div>
 </div>
 
 <!-- ══ TABS ════════════════════════════════════════════════════════ -->
@@ -589,7 +591,7 @@ tr:hover td{background:#ffffff03}
 <!-- ══ FOOTER ═══════════════════════════════════════════════════════ -->
 <div class="footer">
   Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
-  <a href="/cdn-cgi/l/email-protection#91e3fef5e3f8f6fee7f8fdfdf0fdfef3fee2a0a8a6a9d1f6fcf0f8fdbff2fefc"><span class="__cf_email__" data-cfemail="ef9d808b9d868880998683838e83808d809cded6d8d7af88828e8683c18c8082">[email&#160;protected]</span></a><br>
+  <a href="mailto:rodrigovillalobos1978@gmail.com">rodrigovillalobos1978@gmail.com</a><br>
   Liceo Marta Brunet · 4° Medio · Fondo Fiesta de Gala
 </div>
 
@@ -608,7 +610,7 @@ tr:hover td{background:#ffffff03}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ═══════════════════════════════════════════════════════════════════
    STORAGE — File System Access API + IndexedDB + localStorage fallback
    ═══════════════════════════════════════════════════════════════════
