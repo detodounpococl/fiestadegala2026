@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fondo Gala · Liceo Marta Brunet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & VARIABLES ───────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0a0f;--s0:#130d13;--s1:#1a1020;--s2:#1f1325;
+  --bd:#2d1a30;--bd2:#3d2542;
+  --gold:#e879a8;--gold2:#f9a8d4;--cream:#fce7f3;
+  --green:#6ee7b7;--red:#fca5a5;--yellow:#fde68a;--blue:#93c5fd;
+  --purple:#a78bfa;
+  --txt:#f0e0ef;--muted:#6b6880;--muted2:#9490a8;
+  --r:12px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  font-family:'Outfit',sans-serif;
+  color:var(--txt);
+  min-height:100vh;
+}
+
+/* ─── HEADER ───────────────────────────────────────────────────────── */
+.hdr{
+  position:relative;overflow:hidden;
+  padding:40px 24px 30px;
+  text-align:center;
+  border-bottom:1px solid var(--bd);
+}
+.hdr-glow{
+  position:absolute;width:700px;height:220px;
+  background:radial-gradient(ellipse,#e879a818 0%,transparent 70%);
+  top:0;left:50%;transform:translateX(-50%);
+  pointer-events:none;
+}
+.hdr-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#e879a80f;border:1px solid #e879a830;
+  color:var(--gold);font-size:10px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  padding:5px 16px;border-radius:100px;margin-bottom:14px;
+}
+.hdr h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,46px);font-weight:900;
+  background:linear-gradient(135deg,var(--gold2) 0%,var(--cream) 55%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-1px;line-height:1.1;
+}
+.hdr p{color:var(--muted2);font-size:13px;font-weight:300;margin-top:8px}
+
+/* saved indicator */
+.save-dot{
+  position:absolute;top:16px;right:20px;
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--muted);font-weight:500;
+}
+.save-dot span{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ─── TABS ─────────────────────────────────────────────────────────── */
+.tab-bar{
+  display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  padding:8px 12px;background:var(--s0);
+  border-bottom:1px solid var(--bd);
+  position:sticky;top:0;z-index:50;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:7px 11px;border-radius:7px;
+  border:none;background:none;
+  color:var(--muted);font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:500;cursor:pointer;
+  white-space:nowrap;transition:all .2s;
+}
+.tab-btn:hover{color:var(--txt);background:var(--s1)}
+.tab-btn.act{
+  background:linear-gradient(135deg,#e879a818,#e879a806);
+  color:var(--gold2);border:1px solid #e879a828;
+}
+
+/* ─── LAYOUT ───────────────────────────────────────────────────────── */
+.body{max-width:1020px;margin:0 auto;padding:26px 16px 60px}
+.tab-panel{display:none}.tab-panel.act{display:flex;flex-direction:column;gap:16px}
+
+/* ─── GRID ─────────────────────────────────────────────────────────── */
+.g{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:680px){.g2,.g3,.g4{grid-template-columns:1fr}}
+@media(min-width:681px) and (max-width:860px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+
+/* ─── CARDS ────────────────────────────────────────────────────────── */
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:22px}
+.card-hint{background:#e879a808;border-color:#e879a822}
+
+.kpi{
+  background:var(--s1);border:1px solid var(--bd);
+  border-radius:var(--r);padding:20px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.kpi:hover{border-color:var(--bd2);transform:translateY(-2px)}
+.kpi-line{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:2px}
+.kpi-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--cream);line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:6px}
+
+.ctitle{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--gold2);margin-bottom:18px;
+}
+
+/* ─── FORM ─────────────────────────────────────────────────────────── */
+.fg{display:flex;flex-direction:column;gap:5px;flex:1}
+.lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=number],input[type=date],select{
+  width:100%;background:var(--bg);border:1px solid var(--bd);
+  border-radius:8px;color:var(--txt);
+  font-family:'Outfit',sans-serif;font-size:13px;
+  padding:9px 12px;outline:none;transition:border-color .2s;
+}
+input:focus,select:focus{border-color:var(--gold)}
+input::placeholder{color:var(--muted)}
+input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--gold)}
+select option{background:var(--s1)}
+
+.form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+
+/* ─── BUTTONS ──────────────────────────────────────────────────────── */
+.btn{
+  padding:9px 20px;border-radius:8px;border:none;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.btn-g{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b0b11}
+.btn-g:hover{opacity:.85;transform:translateY(-1px)}
+.btn-ol{background:none;border:1px solid var(--bd);color:var(--muted2)}
+.btn-ol:hover{border-color:var(--gold);color:var(--gold)}
+.btn-del{
+  background:none;border:1px solid #fca5a520;
+  color:var(--red);padding:5px 10px;font-size:11px;
+  border-radius:6px;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-weight:600;
+  transition:background .2s;
+}
+.btn-del:hover{background:#fca5a512}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-export{
+  background:var(--s2);border:1px solid var(--bd);
+  color:var(--muted2);padding:5px 10px;font-size:11px;
+  border-radius:7px;cursor:pointer;font-family:'Outfit',sans-serif;
+  font-weight:500;transition:all .2s;white-space:nowrap;
+}
+.btn-export:hover{border-color:var(--gold);color:var(--gold)}
+.btn-exportar{border-color:#6ee7b740;color:var(--green) !important}
+.btn-exportar:hover{background:#6ee7b712 !important;border-color:var(--green) !important;color:var(--green) !important}
+.btn-importar{border-color:#93c5fd40;color:var(--blue) !important}
+.btn-importar:hover{background:#93c5fd12 !important;border-color:var(--blue) !important;color:var(--blue) !important}
+
+/* ─── TABLE ────────────────────────────────────────────────────────── */
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--bd)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{
+  background:var(--s2);padding:10px 14px;text-align:left;
+  font-size:9.5px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;
+}
+td{padding:11px 14px;border-top:1px solid var(--bd);vertical-align:middle}
+tr:hover td{background:#ffffff03}
+.no-data td{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+
+/* ─── BADGES ───────────────────────────────────────────────────────── */
+.badge{
+  display:inline-block;padding:3px 9px;border-radius:100px;
+  font-size:10.5px;font-weight:700;cursor:pointer;
+}
+.bg{background:#6ee7b722;color:var(--green);border:1px solid #6ee7b730}
+.br{background:#fca5a520;color:var(--red);border:1px solid #fca5a530}
+.by{background:#fde68a20;color:var(--yellow);border:1px solid #fde68a30}
+.bb{background:#93c5fd20;color:var(--blue);border:1px solid #93c5fd30}
+.bp{background:#a78bfa20;color:var(--purple);border:1px solid #a78bfa30}
+
+/* ─── PROGRESS ─────────────────────────────────────────────────────── */
+.pbar{background:var(--bd);border-radius:100px;height:13px;overflow:hidden;margin:16px 0 8px}
+.pfill{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+
+/* ─── DIVIDER ──────────────────────────────────────────────────────── */
+.div{height:1px;background:var(--bd);margin:18px 0}
+
+/* ─── BIG NUMBER ───────────────────────────────────────────────────── */
+.big{
+  font-family:'Playfair Display',serif;font-size:40px;font-weight:900;
+  background:linear-gradient(135deg,var(--gold2),#f8bbea);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;
+}
+
+/* ─── INFOBOX ──────────────────────────────────────────────────────── */
+.ibox{background:var(--s2);border-radius:10px;padding:14px 16px;border:1px solid var(--bd)}
+.irow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)}
+.irow:last-child{border-bottom:none}
+.irow-lbl{font-size:12.5px;color:var(--muted2)}
+
+/* inline edit in table */
+.ie{
+  background:var(--bg);border:1px solid var(--bd);
+  border-radius:6px;color:var(--txt);
+  font-family:'Outfit',sans-serif;font-size:12.5px;
+  padding:5px 9px;width:120px;outline:none;
+}
+.ie:focus{border-color:var(--gold)}
+
+/* ─── TOAST ────────────────────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(30px);
+  padding:11px 24px;border-radius:100px;
+  font-size:13px;font-weight:600;z-index:999;
+  pointer-events:none;opacity:0;
+  box-shadow:0 8px 32px #00000077;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.ok{background:var(--green);color:#0b0b11}
+#toast.err{background:var(--red);color:#0b0b11}
+#toast.info{background:var(--blue);color:#0b0b11}
+
+/* ─── MODAL ────────────────────────────────────────────────────────── */
+#modal-bg{
+  position:fixed;inset:0;background:#00000090;
+  z-index:200;display:none;
+  align-items:center;justify-content:center;padding:20px;
+}
+#modal-bg.show{display:flex}
+.mbox{
+  background:var(--s1);border:1px solid var(--bd);
+  border-radius:var(--r);padding:28px;max-width:380px;width:100%;
+  animation:mIn .25s ease;
+}
+@keyframes mIn{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+.mbox h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--cream);margin-bottom:8px}
+.mbox p{font-size:13px;color:var(--muted2);margin-bottom:22px;line-height:1.6}
+.mbtns{display:flex;gap:10px;justify-content:flex-end}
+
+/* ─── EMPTY STATE ──────────────────────────────────────────────────── */
+.empty{text-align:center;padding:44px 20px;color:var(--muted)}
+.empty-ico{font-size:30px;margin-bottom:10px}
+.empty p{font-size:13px;line-height:1.6}
+
+/* ─── CLOCK ────────────────────────────────────────────────────────── */
+.clock-bar{
+  background:var(--s0);border-bottom:1px solid var(--bd);
+  padding:7px 24px;display:flex;justify-content:space-between;
+  align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap;gap:6px;
+}
+.clock-time{
+  font-family:'Playfair Display',serif;font-size:14px;
+  color:var(--gold2);font-weight:700;letter-spacing:1px;
+}
+.clock-author{font-size:11px;color:var(--muted)}
+.clock-author a{color:var(--gold);text-decoration:none}
+.clock-author a:hover{text-decoration:underline}
+
+/* ─── COUNTDOWN ────────────────────────────────────────────────────── */
+.cd-wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-top:18px;
+}
+.cd-box{
+  background:var(--s2);border:1px solid var(--bd);border-radius:10px;
+  padding:14px 10px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cd-box::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold)08,transparent);
+  pointer-events:none;
+}
+.cd-num{
+  font-family:'Playfair Display',serif;font-size:36px;font-weight:900;
+  background:linear-gradient(135deg,var(--gold2),#f8bbea);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;
+  animation:cdPop .1s ease;
+}
+.cd-lbl{font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);margin-top:6px}
+@keyframes cdPop{from{transform:scale(1.08)}to{transform:scale(1)}}
+
+/* ─── BALANCE / SCALE ─────────────────────────────────────────────── */
+.scale-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  padding:10px 0 20px;position:relative;
+}
+.scale-beam-box{
+  width:100%;max-width:600px;position:relative;height:140px;
+}
+/* pivot */
+.scale-pivot{
+  width:14px;height:60px;
+  background:linear-gradient(to bottom,var(--gold2),var(--gold));
+  border-radius:4px;
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  box-shadow:0 0 20px var(--gold)66;
+}
+.scale-pivot::before{
+  content:'';position:absolute;
+  top:-8px;left:50%;transform:translateX(-50%);
+  width:18px;height:18px;border-radius:50%;
+  background:var(--gold2);box-shadow:0 0 14px var(--gold2)88;
+}
+/* beam */
+.scale-beam{
+  width:90%;height:6px;
+  background:linear-gradient(90deg,var(--gold)88,var(--gold2),var(--gold)88);
+  border-radius:3px;
+  position:absolute;left:5%;bottom:60px;
+  transform-origin:center center;
+  transition:transform 1.2s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 12px var(--gold)33;
+}
+/* pans */
+.scale-pan-left,.scale-pan-right{
+  width:110px;height:50px;
+  border-radius:50% 50% 0 0 / 30% 30% 0 0;
+  border:2px solid var(--gold)66;
+  position:absolute;bottom:-12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:bottom 1.2s cubic-bezier(.34,1.56,.64,1);
+  font-size:10px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;padding-top:8px;
+  background:linear-gradient(to bottom,var(--s2),var(--bg));
+}
+.scale-pan-left{
+  left:0;color:var(--green);border-color:var(--green)44;
+  box-shadow:0 4px 20px var(--green)22;
+}
+.scale-pan-right{
+  right:0;color:var(--red);border-color:var(--red)44;
+  box-shadow:0 4px 20px var(--red)22;
+}
+.scale-pan-amount{
+  font-family:'Playfair Display',serif;font-size:13px;font-weight:700;
+  margin-bottom:2px;
+}
+/* coins floating */
+.coin{
+  position:absolute;font-size:16px;
+  animation:coinFloat 3s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes coinFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);opacity:.7}
+  50%{transform:translateY(-8px) rotate(10deg);opacity:1}
+}
+/* message */
+.scale-msg{
+  margin-top:20px;max-width:500px;text-align:center;
+  font-size:14px;font-weight:600;line-height:1.6;
+  padding:14px 20px;border-radius:10px;
+  border:1px solid;
+  animation:msgFade .5s ease;
+}
+@keyframes msgFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── FOOTER ───────────────────────────────────────────────────────── */
+.footer{
+  text-align:center;padding:20px;border-top:1px solid var(--bd);
+  font-size:11.5px;color:var(--muted);margin-top:20px;line-height:1.8;
+}
+.footer a{color:var(--gold);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════════ -->
+<div class="hdr">
+  <div class="hdr-glow"></div>
+  <div class="save-dot" id="save-status" title="Estado del archivo"><span id="save-dot-led"></span><span id="save-status-txt">Sin archivo</span></div>
+  <div class="hdr-badge">🌸 Liceo Marta Brunet · 4° Medio 🌸</div>
+  <h1>Fondo Fiesta de Gala</h1>
+  <p>Control de compras, ventas y aportes para la fiesta de despedida</p>
+</div>
+
+<!-- ══ CLOCK BAR ════════════════════════════════════════════════════ -->
+<div class="clock-bar">
+  <div class="clock-author">
+    Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
+    <a href="/cdn-cgi/l/email-protection#592b363d2b303e362f3035353835363b362a68606e61193e34383035773a3634"><span class="__cf_email__" data-cfemail="e4968b80968d838b928d888885888b868b97d5ddd3dca48389858d88ca878b89">[email&#160;protected]</span></a>
+  </div>
+  <div class="clock-time" id="reloj-display">cargando...</div>
+</div>
+
+<!-- ══ TABS ════════════════════════════════════════════════════════ -->
+<div class="tab-bar">
+  <button class="tab-btn act" onclick="showTab('resumen')">◈ Resumen</button>
+  <button class="tab-btn" onclick="showTab('productos')">◇ Productos</button>
+  <button class="tab-btn" onclick="showTab('ventas')">◆ Ventas</button>
+  <button class="tab-btn" onclick="showTab('fondos')">◉ Años Anteriores</button>
+  <button class="tab-btn" onclick="showTab('meta')">◐ Meta Fiesta</button>
+  <div style="margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+    <button class="btn-export btn-importar" onclick="importarJSON()" title="Cargar datos desde un archivo .json">⬆ Importar JSON</button>
+    <button class="btn-export btn-exportar" onclick="exportarJSON()" title="Descargar todos los datos como .json">⬇ Exportar JSON</button>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- ══ RESUMEN ═══════════════════════════════════════════════════ -->
+  <div id="tab-resumen" class="tab-panel act">
+    <div class="g g4" id="kpi-row"></div>
+
+    <!-- Cuenta regresiva -->
+    <div class="card" id="countdown-card"></div>
+
+    <!-- Balanza animada -->
+    <div class="card" id="balance-card"></div>
+
+    <div class="card" id="progress-card">
+      <div class="ctitle">🎉 Progreso hacia la Meta</div>
+      <div id="progress-content"></div>
+    </div>
+
+    <div class="g g2">
+      <div class="card">
+        <div class="ctitle">💼 Resumen de Ventas</div>
+        <div id="ventas-summary"></div>
+      </div>
+      <div class="card">
+        <div class="ctitle">📅 Fondos por Año</div>
+        <div id="fondos-summary"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ALUMNOS ═══════════════════════════════════════════════════ -->
+  <!-- ══ PRODUCTOS ═════════════════════════════════════════════════ -->
+  <div id="tab-productos" class="tab-panel">
+    <div class="card">
+      <div class="ctitle">🛍️ Agregar Producto</div>
+      <div class="form-row" style="gap:10px">
+        <div class="fg" style="flex:2;min-width:160px">
+          <label class="lbl">Nombre del producto</label>
+          <input type="text" id="p-name" placeholder="Ej: Bebida 1.5L"/>
+        </div>
+        <div class="fg" style="min-width:110px">
+          <label class="lbl">Cantidad comprada</label>
+          <input type="number" id="p-qty" placeholder="0" min="0"/>
+        </div>
+        <div class="fg" style="min-width:130px">
+          <label class="lbl">Precio compra c/u ($)</label>
+          <input type="number" id="p-buy" placeholder="0" min="0"/>
+        </div>
+        <div class="fg" style="min-width:130px">
+          <label class="lbl">Precio venta c/u ($)</label>
+          <input type="number" id="p-sell" placeholder="0" min="0" onkeydown="if(event.key==='Enter')addProduct()"/>
+        </div>
+        <button class="btn btn-g" onclick="addProduct()">Agregar</button>
+      </div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th><th>Comprados</th><th>Stock disponible</th>
+            <th>P. Compra</th><th>P. Venta</th><th>Ganancia c/u</th>
+            <th>Inversión total</th><th>Stock × venta</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="products-tbody"></tbody>
+      </table>
+    </div>
+
+    <div id="product-kpis" class="g g3"></div>
+  </div>
+
+  <!-- ══ VENTAS ═════════════════════════════════════════════════════ -->
+  <div id="tab-ventas" class="tab-panel">
+    <div class="card">
+      <div class="ctitle">💸 Registrar Venta</div>
+      <div id="sale-form-area">
+        <div class="form-row" style="gap:10px">
+          <div class="fg" style="flex:2;min-width:200px">
+            <label class="lbl">Producto</label>
+            <select id="v-product">
+              <option value="">Seleccionar producto...</option>
+            </select>
+          </div>
+          <div class="fg" style="min-width:110px">
+            <label class="lbl">Cantidad</label>
+            <input type="number" id="v-qty" placeholder="0" min="1" onkeydown="if(event.key==='Enter')addSale()"/>
+          </div>
+          <div class="fg" style="min-width:130px">
+            <label class="lbl">Fecha</label>
+            <input type="text" id="v-date"/>
+          </div>
+          <button class="btn btn-g" onclick="addSale()">Registrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th><th>Cantidad</th><th>P. Compra</th>
+            <th>P. Venta</th><th>Ganancia</th><th>Total venta</th><th>Fecha</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="sales-tbody"></tbody>
+      </table>
+    </div>
+
+    <div id="sales-kpis" class="g g3"></div>
+  </div>
+
+  <!-- ══ AÑOS ANTERIORES ════════════════════════════════════════════ -->
+  <div id="tab-fondos" class="tab-panel">
+    <div class="card">
+      <div class="ctitle">📅 Fondos de Años Anteriores</div>
+      <p style="font-size:13px;color:var(--muted2);margin-bottom:22px;line-height:1.6">
+        Ingresa el total recaudado en cada año. Estos montos se suman automáticamente al fondo total.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+        <div class="fg">
+          <label class="lbl">1° Medio — Total recaudado ($)</label>
+          <input type="number" id="f-1" placeholder="0" oninput="saveFund(0,this.value)"/>
+        </div>
+        <div class="fg">
+          <label class="lbl">2° Medio — Total recaudado ($)</label>
+          <input type="number" id="f-2" placeholder="0" oninput="saveFund(1,this.value)"/>
+        </div>
+        <div class="fg">
+          <label class="lbl">3° Medio — Total recaudado ($)</label>
+          <input type="number" id="f-3" placeholder="0" oninput="saveFund(2,this.value)"/>
+        </div>
+      </div>
+      <div class="div"></div>
+      <div class="ibox" style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:14px;font-weight:600;color:var(--gold2)">Total histórico acumulado</span>
+        <span id="prev-total-big" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--gold2)">$0</span>
+      </div>
+    </div>
+    <div class="g g3" id="fondos-kpis"></div>
+  </div>
+
+  <!-- ══ META ═══════════════════════════════════════════════════════ -->
+  <div id="tab-meta" class="tab-panel">
+    <div class="card">
+      <div class="ctitle">🎯 Meta de la Fiesta de Gala</div>
+      <p style="font-size:13px;color:var(--muted2);margin-bottom:20px;line-height:1.6">
+        Define el costo estimado de la fiesta. Puedes editarlo en cualquier momento y el progreso se actualizará automáticamente en todas las vistas.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px">
+        <div class="fg">
+          <label class="lbl">Costo estimado de la fiesta ($)</label>
+          <input type="number" id="goal-input" placeholder="Ej: 2000000" oninput="saveGoal(this.value)"/>
+        </div>
+        <div class="fg">
+          <label class="lbl">📅 Fecha del evento</label>
+          <input type="date" id="event-date-input" oninput="saveEventDate(this.value)"/>
+          <span style="font-size:11px;color:var(--muted);margin-top:4px">La cuenta regresiva aparecerá en el Resumen</span>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="meta-progress-card" style="display:none">
+      <div class="ctitle">📊 Estado Actual</div>
+      <div id="meta-progress-content"></div>
+      <div class="div"></div>
+      <div class="g g2" id="meta-extra"></div>
+    </div>
+  </div>
+
+</div><!-- /body -->
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════════════ -->
+<div class="footer">
+  Desarrollado por <strong style="color:var(--txt)">Rodrigo Villalobos R.</strong> ·
+  <a href="/cdn-cgi/l/email-protection#91e3fef5e3f8f6fee7f8fdfdf0fdfef3fee2a0a8a6a9d1f6fcf0f8fdbff2fefc"><span class="__cf_email__" data-cfemail="ef9d808b9d868880998683838e83808d809cded6d8d7af88828e8683c18c8082">[email&#160;protected]</span></a><br>
+  Liceo Marta Brunet · 4° Medio · Fondo Fiesta de Gala
+</div>
+
+<!-- ══ TOAST ══════════════════════════════════════════════════════ -->
+<div id="toast"></div>
+
+<!-- ══ MODAL ══════════════════════════════════════════════════════ -->
+<div id="modal-bg" onclick="closeModal()">
+  <div class="mbox" onclick="event.stopPropagation()">
+    <h3 id="modal-title">Confirmar</h3>
+    <p id="modal-msg"></p>
+    <div class="mbtns">
+      <button class="btn btn-ol" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-g" id="modal-confirm">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══════════════════════════════════════════════════════════════════
+   STORAGE — File System Access API + IndexedDB + localStorage fallback
+   ═══════════════════════════════════════════════════════════════════
+   Flujo:
+   1. Al abrir: busca handle guardado en IndexedDB → lee el .json
+   2. Cada cambio: escribe al .json en disco automáticamente
+   3. Fallback: localStorage si el navegador no soporta la API
+   ═══════════════════════════════════════════════════════════════════ */
+
+const LS_KEY   = 'mb_gala_v3';
+const IDB_NAME = 'mb_gala_idb';
+const IDB_VER  = 1;
+const HND_KEY  = 'fileHandle';
+
+const FS_SUPPORTED = ('showSaveFilePicker' in window);
+
+const DEFAULT = {
+  partyGoal: 0,
+  eventDate: '',
+  previousFunds: [
+    { year: '1° Medio', amount: '' },
+    { year: '2° Medio', amount: '' },
+    { year: '3° Medio', amount: '' },
+  ],
+  students: [],
+  products: [],
+  sales: [],
+};
+
+let data        = JSON.parse(JSON.stringify(DEFAULT));
+let fileHandle  = null;   // File System Access handle
+let saveTimer   = null;
+let saveQueued  = false;
+let usingFile   = false;
+
+/* ── IndexedDB helpers (para guardar el file handle) ──────────────── */
+function openIDB() {
+  return new Promise((res, rej) => {
+    const req = indexedDB.open(IDB_NAME, IDB_VER);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('handles');
+    req.onsuccess = e => res(e.target.result);
+    req.onerror   = () => rej(req.error);
+  });
+}
+async function idbGet(key) {
+  try {
+    const db = await openIDB();
+    return new Promise(res => {
+      const tx = db.transaction('handles','readonly');
+      const r  = tx.objectStore('handles').get(key);
+      r.onsuccess = () => res(r.result ?? null);
+      r.onerror   = () => res(null);
+    });
+  } catch { return null; }
+}
+async function idbSet(key, val) {
+  try {
+    const db = await openIDB();
+    return new Promise(res => {
+      const tx = db.transaction('handles','readwrite');
+      tx.objectStore('handles').put(val, key);
+      tx.oncomplete = res;
+      tx.onerror    = res;
+    });
+  } catch {}
+}
+async function idbDel(key) {
+  try {
+    const db = await openIDB();
+    const tx = db.transaction('handles','readwrite');
+    tx.objectStore('handles').delete(key);
+  } catch {}
+}
+
+/* ── Leer JSON desde un File handle ──────────────────────────────── */
+async function readFromHandle(handle) {
+  const file = await handle.getFile();
+  const text = await file.text();
+  return JSON.parse(text);
+}
+
+/* ── Escribir JSON al file handle ────────────────────────────────── */
+async function writeToHandle(handle, payload) {
+  const writable = await handle.createWritable();
+  await writable.write(JSON.stringify(payload, null, 2));
+  await writable.close();
+}
+
+/* ── Verificar permiso del handle ────────────────────────────────── */
+async function verifyPermission(handle, mode = 'readwrite') {
+  const opts = { mode };
+  if ((await handle.queryPermission(opts)) === 'granted') return true;
+  if ((await handle.requestPermission(opts)) === 'granted') return true;
+  return false;
+}
+
+/* ── Guardar datos ───────────────────────────────────────────────── */
+async function saveData() {
+  // Siempre guarda en localStorage como respaldo
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {}
+
+  if (usingFile && fileHandle) {
+    try {
+      await writeToHandle(fileHandle, data);
+      setStatus('saved');
+    } catch(e) {
+      console.warn('Error guardando en archivo:', e);
+      setStatus('error');
+    }
+  }
+}
+
+/* ── Guardar con debounce (evita escrituras excesivas) ───────────── */
+function saveDataDebounced() {
+  if (saveTimer) clearTimeout(saveTimer);
+  setStatus('saving');
+  saveTimer = setTimeout(() => saveData(), 600);
+}
+
+/* ── Indicador de estado ─────────────────────────────────────────── */
+function setStatus(state) {
+  const led = document.getElementById('save-dot-led');
+  const txt = document.getElementById('save-status-txt');
+  if (!led || !txt) return;
+  const map = {
+    saved:   { color:'#6ee7b7', text:'Guardado en archivo', anim:'pulse' },
+    saving:  { color:'#fde68a', text:'Guardando…',          anim:'none'  },
+    error:   { color:'#fca5a5', text:'Error al guardar',    anim:'none'  },
+    nofile:  { color:'#6b6880', text:'Sin archivo',         anim:'none'  },
+    local:   { color:'#93c5fd', text:'Guardado localmente', anim:'pulse' },
+  };
+  const s = map[state] || map.nofile;
+  led.style.background  = s.color;
+  led.style.animation   = s.anim === 'pulse' ? 'pulse 2s infinite' : 'none';
+  txt.textContent       = s.text;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ACCIONES DE ARCHIVO
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Crear nuevo archivo ─────────────────────────────────────────── */
+async function crearArchivo() {
+  if (!FS_SUPPORTED) { modoSinArchivo(); return; }
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: 'datos-gala-marta-brunet.json',
+      types: [{ description: 'Archivo JSON', accept: { 'application/json': ['.json'] } }],
+    });
+    fileHandle = handle;
+    usingFile  = true;
+    data       = JSON.parse(JSON.stringify(DEFAULT));
+    await writeToHandle(handle, data);
+    await idbSet(HND_KEY, handle);
+    ocultarSplash();
+    setStatus('saved');
+    toast('Archivo creado y listo ✓', 'ok');
+    iniciarApp();
+  } catch(e) {
+    if (e.name !== 'AbortError') toast('No se pudo crear el archivo', 'err');
+  }
+}
+
+/* ── Abrir archivo existente ─────────────────────────────────────── */
+async function abrirArchivo() {
+  if (!FS_SUPPORTED) {
+    // Fallback: input file
+    const input = document.createElement('input');
+    input.type  = 'file';
+    input.accept= '.json';
+    input.onchange = async () => {
+      if (!input.files[0]) return;
+      try {
+        const text   = await input.files[0].text();
+        const parsed = JSON.parse(text);
+        data = { ...DEFAULT, ...parsed };
+        try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {}
+        usingFile = false;
+        ocultarSplash();
+        setStatus('local');
+        toast('Datos cargados ✓', 'ok');
+        iniciarApp();
+      } catch { toast('Error al leer el archivo', 'err'); }
+    };
+    input.click();
+    return;
+  }
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: 'Archivo JSON', accept: { 'application/json': ['.json'] } }],
+    });
+    const ok = await verifyPermission(handle);
+    if (!ok) { toast('Permiso denegado', 'err'); return; }
+    const parsed = await readFromHandle(handle);
+    data       = { ...DEFAULT, ...parsed };
+    fileHandle = handle;
+    usingFile  = true;
+    await idbSet(HND_KEY, handle);
+    ocultarSplash();
+    setStatus('saved');
+    toast(`Archivo abierto: ${handle.name} ✓`, 'ok');
+    iniciarApp();
+  } catch(e) {
+    if (e.name !== 'AbortError') toast('No se pudo abrir el archivo', 'err');
+  }
+}
+
+/* ── Modo sin archivo (solo sesión) ──────────────────────────────── */
+function modoSinArchivo() {
+  usingFile = false;
+  // Intentar cargar desde localStorage
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) data = { ...DEFAULT, ...JSON.parse(raw) };
+  } catch {}
+  ocultarSplash();
+  setStatus('local');
+  toast('Usando almacenamiento local del navegador', 'info');
+  iniciarApp();
+}
+
+/* ── Guardar copia manual ────────────────────────────────────────── */
+/* ── EXPORTAR JSON ───────────────────────────────────────────────── */
+function exportarJSON() {
+  const fecha = new Date().toLocaleDateString('es-CL').replace(/\//g, '-');
+  const nombre = `gala-marta-brunet-${fecha}.json`;
+  const str  = JSON.stringify(data, null, 2);
+  const blob = new Blob([str], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = nombre;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast(`✓ Exportado como "${nombre}"`, 'ok');
+}
+
+/* ── IMPORTAR JSON ───────────────────────────────────────────────── */
+function importarJSON() {
+  // Mostrar modal de confirmación antes de sobreescribir
+  const tieneData = data.products.length > 0 || data.sales.length > 0;
+  const continuar = () => {
+    const input  = document.createElement('input');
+    input.type   = 'file';
+    input.accept = '.json,application/json';
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        const texto   = await file.text();
+        const parsed  = JSON.parse(texto);
+        // Validar que es un archivo compatible
+        if (typeof parsed !== 'object' || Array.isArray(parsed)) {
+          toast('El archivo no tiene el formato correcto', 'err'); return;
+        }
+        data = { ...DEFAULT, ...parsed };
+        saveDataDebounced();
+        renderAll();
+        toast(`✓ Datos importados desde "${file.name}"`, 'ok');
+      } catch(e) {
+        toast('Error al leer el archivo — ¿es un JSON válido?', 'err');
+      }
+    };
+    input.click();
+  };
+
+  if (tieneData) {
+    confirm2(
+      '⚠️ Al importar se reemplazarán TODOS los datos actuales con los del archivo. ¿Continuar?',
+      continuar
+    );
+  } else {
+    continuar();
+  }
+}
+
+async function guardarCopia() {
+  if (FS_SUPPORTED) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: `copia-gala-${new Date().toLocaleDateString('es-CL').replace(/\//g,'-')}.json`,
+        types: [{ description: 'Archivo JSON', accept: { 'application/json': ['.json'] } }],
+      });
+      await writeToHandle(handle, data);
+      toast('Copia guardada ✓', 'ok');
+    } catch(e) {
+      if (e.name !== 'AbortError') {
+        // Fallback download
+        descargarJSON();
+      }
+    }
+  } else {
+    descargarJSON();
+  }
+}
+
+function descargarJSON() {
+  const str  = JSON.stringify(data, null, 2);
+  const blob = new Blob([str], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `copia-gala-${new Date().toLocaleDateString('es-CL').replace(/\//g,'-')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Copia descargada ✓', 'info');
+}
+
+function ocultarSplash() { /* splash eliminado */ }
+
+/* ── Recuperar handle de IndexedDB al recargar ───────────────────── */
+async function intentarRecuperarHandle() {
+  if (!FS_SUPPORTED) return false;
+  try {
+    const handle = await idbGet(HND_KEY);
+    if (!handle) return false;
+    const ok = await verifyPermission(handle);
+    if (!ok) { await idbDel(HND_KEY); return false; }
+    const parsed = await readFromHandle(handle);
+    data       = { ...DEFAULT, ...parsed };
+    fileHandle = handle;
+    usingFile  = true;
+    setStatus('saved');
+    return true;
+  } catch(e) {
+    console.warn('No se pudo recuperar el handle:', e);
+    await idbDel(HND_KEY);
+    return false;
+  }
+}
+
+/* ── Guardar al cerrar la pestaña ────────────────────────────────── */
+window.addEventListener('beforeunload', () => {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {}
+});
+// Guardar periódicamente cada 15 segundos como respaldo
+setInterval(() => { try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {} }, 15000);
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════════════ */
+const uid  = () => Math.random().toString(36).slice(2, 9);
+const num  = v  => parseFloat(v) || 0;
+const fmt  = n  => '$' + Math.round(Number(n)||0).toLocaleString('es-CL');
+const esc  = s  => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+let toastTimer;
+function toast(msg, type='ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = ''; }, 3000);
+}
+
+let modalCb = null;
+function confirm2(msg, cb) {
+  document.getElementById('modal-msg').textContent = msg;
+  document.getElementById('modal-bg').classList.add('show');
+  modalCb = cb;
+  document.getElementById('modal-confirm').onclick = () => { closeModal(); if(modalCb) modalCb(); };
+}
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('show');
+  modalCb = null;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DERIVED CALCULATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+function calcTotals() {
+  const prevTotal    = data.previousFunds.reduce((s,f) => s + num(f.amount), 0);
+
+  const totalRevenue = data.sales.reduce((s,sale) => {
+    const p = data.products.find(x => x.id === sale.productId);
+    return s + num(sale.qty) * num(p?.sellPrice);
+  }, 0);
+  const totalCostSold= data.sales.reduce((s,sale) => {
+    const p = data.products.find(x => x.id === sale.productId);
+    return s + num(sale.qty) * num(p?.buyPrice);
+  }, 0);
+  const netProfit  = totalRevenue - totalCostSold;
+  const grandTotal = prevTotal + netProfit;
+  const goal       = num(data.partyGoal);
+  const progress   = goal > 0 ? Math.min((grandTotal / goal) * 100, 100) : 0;
+  const remaining  = Math.max(goal - grandTotal, 0);
+  const progColor  = progress >= 75 ? '#6ee7b7' : progress >= 40 ? '#fde68a' : '#fca5a5';
+
+  return { prevTotal, totalRevenue, totalCostSold,
+           netProfit, grandTotal, goal, progress, remaining, progColor };
+}
+
+function getStock(pid) {
+  const p = data.products.find(x => x.id === pid);
+  if (!p) return 0;
+  const sold = data.sales.filter(s => s.productId === pid).reduce((a,s) => a + num(s.qty), 0);
+  return num(p.qty) - sold;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════════════ */
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('act'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('act'));
+  document.getElementById('tab-' + id).classList.add('act');
+  const btns = document.querySelectorAll('.tab-btn');
+  const map  = ['resumen','productos','ventas','fondos','meta'];
+  btns[map.indexOf(id)]?.classList.add('act');
+  renderAll();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RELOJ EN TIEMPO REAL
+   ═══════════════════════════════════════════════════════════════════ */
+function actualizarReloj() {
+  const el = document.getElementById('reloj-display');
+  if (!el) return;
+  const now  = new Date();
+  const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses= ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const d    = dias[now.getDay()];
+  const m    = meses[now.getMonth()];
+  const hh   = String(now.getHours()).padStart(2,'0');
+  const mm   = String(now.getMinutes()).padStart(2,'0');
+  const ss   = String(now.getSeconds()).padStart(2,'0');
+  el.textContent = `${d} ${now.getDate()} de ${m} ${now.getFullYear()} · ${hh}:${mm}:${ss}`;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CUENTA REGRESIVA
+   ═══════════════════════════════════════════════════════════════════ */
+function renderCountdown() {
+  const card = document.getElementById('countdown-card');
+  if (!card) return;
+
+  if (!data.eventDate) {
+    card.innerHTML = `
+      <div class="ctitle">⏳ Cuenta Regresiva para la Gala</div>
+      <div class="empty">
+        <div class="empty-ico">📅</div>
+        <p>Ingresa la fecha del evento en <strong>Meta Fiesta</strong> para ver la cuenta regresiva.</p>
+        <button class="btn btn-g btn-sm" onclick="showTab('meta')" style="margin-top:12px">Configurar fecha →</button>
+      </div>`;
+    return;
+  }
+
+  const evento   = new Date(data.eventDate + 'T00:00:00');
+  const ahora    = new Date();
+  const diff     = evento - ahora;
+
+  if (diff <= 0) {
+    card.innerHTML = `
+      <div class="ctitle">🎉 ¡Es el gran día!</div>
+      <div style="text-align:center;padding:24px">
+        <div style="font-size:56px;margin-bottom:12px">🥂</div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;
+          background:linear-gradient(135deg,var(--gold2),#f8bbea);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+          ¡Felicidades, llegó la Fiesta de Gala!
+        </div>
+        <p style="color:var(--muted2);margin-top:10px;font-size:14px">Todo el esfuerzo valió la pena 🌟</p>
+      </div>`;
+    return;
+  }
+
+  const totalSeg = Math.floor(diff / 1000);
+  const dias     = Math.floor(totalSeg / 86400);
+  const horas    = Math.floor((totalSeg % 86400) / 3600);
+  const minutos  = Math.floor((totalSeg % 3600) / 60);
+  const segundos = totalSeg % 60;
+
+  const fechaStr = evento.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  card.innerHTML = `
+    <div class="ctitle">⏳ Cuenta Regresiva · <span style="font-size:14px;color:var(--muted2);font-family:'Outfit',sans-serif;font-weight:400">${fechaStr}</span></div>
+    <div class="cd-wrap">
+      <div class="cd-box">
+        <div class="cd-num" id="cd-dias">${String(dias).padStart(2,'0')}</div>
+        <div class="cd-lbl">Días</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-num" id="cd-horas">${String(horas).padStart(2,'0')}</div>
+        <div class="cd-lbl">Horas</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-num" id="cd-minutos">${String(minutos).padStart(2,'0')}</div>
+        <div class="cd-lbl">Minutos</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-num" id="cd-segundos">${String(segundos).padStart(2,'0')}</div>
+        <div class="cd-lbl">Segundos</div>
+      </div>
+    </div>`;
+}
+
+// Actualizar solo los números del countdown sin re-renderear todo
+function tickCountdown() {
+  if (!data.eventDate) return;
+  const evento = new Date(data.eventDate + 'T00:00:00');
+  const diff   = evento - new Date();
+  if (diff <= 0) { renderCountdown(); return; }
+  const totalSeg = Math.floor(diff / 1000);
+  const dias     = Math.floor(totalSeg / 86400);
+  const horas    = Math.floor((totalSeg % 86400) / 3600);
+  const minutos  = Math.floor((totalSeg % 3600) / 60);
+  const segundos = totalSeg % 60;
+  const set = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=String(v).padStart(2,'0'); };
+  set('cd-dias',    dias);
+  set('cd-horas',   horas);
+  set('cd-minutos', minutos);
+  set('cd-segundos',segundos);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BALANZA ANIMADA
+   ═══════════════════════════════════════════════════════════════════ */
+function renderBalance() {
+  const card = document.getElementById('balance-card');
+  if (!card) return;
+
+  const T    = calcTotals();
+  const meta = T.goal;
+  const tene = T.grandTotal;
+  const pct  = meta > 0 ? Math.min(tene / meta, 1) : 0;
+
+  // Ángulo: -20° (vacío) → 0° (equilibrio) → +20° (superado)
+  // pct=0 → beam -22deg (meta pesa más, lado derecho baja)
+  // pct=1 → beam +22deg (tenemos pesa más, lado izquierdo baja)
+  const angulo = (pct - 0.5) * 44; // -22 a +22
+
+  // Desplazamiento vertical de las bandejas
+  // izquierda baja cuando angulo positivo, sube cuando negativo
+  const panOffset = 55 * (angulo / 22); // px
+  const leftDown  = Math.max(0, panOffset);
+  const rightDown = Math.max(0, -panOffset);
+
+  // Monedas flotando: más en el lado que pesa más
+  const coinsLeft  = Math.round(pct * 5);
+  const coinsRight = Math.round((1 - pct) * 5);
+  const makeCoins  = (n, delay=0) => Array.from({length:n}, (_,i) =>
+    `<span class="coin" style="left:${10+i*18}px;top:${8+i%2*10}px;animation-delay:${delay+i*0.4}s">🪙</span>`
+  ).join('');
+
+  // Mensajes motivacionales según porcentaje
+  const msgs = [
+    { pct:0,   color:'var(--red)',    bg:'#fca5a512', border:'#fca5a530',
+      txt:'🚀 ¡El camino comienza! Cada peso que juntan los acerca a esa noche inolvidable. ¡A vender!' },
+    { pct:0.1, color:'var(--red)',    bg:'#fca5a512', border:'#fca5a530',
+      txt:'💪 ¡Ya van comenzando! Pequeños pasos llevan a grandes logros. ¡Sigan adelante!' },
+    { pct:0.25,color:'var(--yellow)', bg:'#fde68a12', border:'#fde68a30',
+      txt:'⚡ ¡Un cuarto del camino recorrido! El equipo está demostrando que puede. ¡No paren!' },
+    { pct:0.4, color:'var(--yellow)', bg:'#fde68a12', border:'#fde68a30',
+      txt:'🔥 ¡Ya van casi a la mitad! La balanza se está inclinando a su favor. ¡Más fuerza!' },
+    { pct:0.5, color:'var(--gold2)', bg:'#e879a812', border:'#e879a830',
+      txt:'⚖️ ¡Equilibrio perfecto! Están exactamente a la mitad. ¡El impulso final llegará!' },
+    { pct:0.65,color:'var(--gold2)', bg:'#e879a812', border:'#e879a830',
+      txt:'✨ ¡Más de la mitad! La fiesta ya se puede oler en el ambiente. ¡Un último empujón!' },
+    { pct:0.8, color:'var(--green)',  bg:'#6ee7b712', border:'#6ee7b730',
+      txt:'🎯 ¡Increíble! Están muy cerca de la meta. La gala los espera con los brazos abiertos.' },
+    { pct:0.95,color:'var(--green)',  bg:'#6ee7b712', border:'#6ee7b730',
+      txt:'🥂 ¡A metros de lograrlo! Solo un poco más y la fiesta estará asegurada. ¡No aflojen!' },
+    { pct:1,   color:'var(--green)',  bg:'#6ee7b722', border:'#6ee7b750',
+      txt:'🎉 ¡¡META ALCANZADA!! ¡Lo lograron! Esta gala está más que merecida. ¡FELICITACIONES!' },
+  ];
+  let msg = msgs[0];
+  for (const m of msgs) { if (pct >= m.pct) msg = m; }
+
+  card.innerHTML = `
+    <div class="ctitle">⚖️ Balanza del Fondo</div>
+    <div class="scale-wrap">
+      <div class="scale-beam-box">
+        <!-- Pivot -->
+        <div class="scale-pivot"></div>
+        <!-- Beam -->
+        <div class="scale-beam" id="scale-beam" style="transform:rotate(${angulo}deg)">
+          <!-- Pan izquierdo: lo que tenemos -->
+          <div class="scale-pan-left" style="bottom:${-12 - leftDown}px;left:0">
+            ${makeCoins(coinsLeft, 0)}
+            <div class="scale-pan-amount">${meta>0?fmt(tene):'$0'}</div>
+            <div>Tenemos</div>
+          </div>
+          <!-- Pan derecho: la meta -->
+          <div class="scale-pan-right" style="bottom:${-12 - rightDown}px;right:0">
+            ${makeCoins(coinsRight, 0.2)}
+            <div class="scale-pan-amount">${meta>0?fmt(meta):'Meta'}</div>
+            <div>Necesitamos</div>
+          </div>
+        </div>
+      </div>
+      <!-- Mensaje -->
+      <div class="scale-msg" style="color:${msg.color};background:${msg.bg};border-color:${msg.border}">
+        ${msg.txt}
+      </div>
+      ${meta>0 ? `<div style="margin-top:12px;font-size:12px;color:var(--muted)">
+        Progreso: <strong style="color:${msg.color}">${(pct*100).toFixed(1)}%</strong>
+        · Faltan <strong style="color:var(--txt)">${fmt(T.remaining)}</strong>
+      </div>` : `<div style="margin-top:12px;font-size:12px;color:var(--muted)">
+        Configura la meta en <button onclick="showTab('meta')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:12px;text-decoration:underline">Meta Fiesta</button> para ver la balanza en acción
+      </div>`}
+    </div>`;
+}
+
+
+function renderResumen() {
+  const T = calcTotals();
+
+  // KPI row
+  document.getElementById('kpi-row').innerHTML = [
+    {lbl:'Total Acumulado',    val:fmt(T.grandTotal),  sub:'Fondos anteriores + ventas',              c:'#e879a8'},
+    {lbl:'Fondos Anteriores',  val:fmt(T.prevTotal),   sub:'1° a 3° Medio',                           c:'#a78bfa'},
+    {lbl:'Ganancia Ventas',    val:fmt(T.netProfit),   sub:`${data.sales.length} ventas registradas`, c:'#6ee7b7'},
+    {lbl:'Productos activos',  val:data.products.length, sub:`${data.products.reduce((s,p)=>s+Math.max(0,Math.floor(parseFloat(p.qty)||0)-data.sales.filter(v=>v.productId===p.id).reduce((a,v)=>a+(parseFloat(v.qty)||0),0)),0)} uds. en stock`, c:'#93c5fd'},
+  ].map(k => `
+    <div class="kpi">
+      <div class="kpi-line" style="background:${k.c}"></div>
+      <div class="kpi-lbl">${k.lbl}</div>
+      <div class="kpi-val">${k.val}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+
+  // Progress
+  let progHtml;
+  if (T.goal > 0) {
+    progHtml = `
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
+        <div><div class="kpi-lbl">Recaudado</div><div class="big">${fmt(T.grandTotal)}</div></div>
+        <div style="text-align:right">
+          <div class="kpi-lbl">Meta</div>
+          <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--muted2)">${fmt(T.goal)}</div>
+        </div>
+      </div>
+      <div class="pbar" style="height:14px;margin-top:20px">
+        <div class="pfill" style="width:${T.progress}%;background:linear-gradient(90deg,${T.progColor}88,${T.progColor});box-shadow:0 0 16px ${T.progColor}55"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between">
+        <span style="font-size:13px;font-weight:700;color:${T.progColor}">${T.progress.toFixed(1)}% completado</span>
+        <span style="font-size:12px;color:var(--muted)">Faltan ${fmt(T.remaining)}</span>
+      </div>`;
+  } else {
+    progHtml = `<div class="empty">
+      <div class="empty-ico">🎯</div>
+      <p>No has ingresado la meta aún.</p>
+      <button class="btn btn-g btn-sm" onclick="showTab('meta')" style="margin-top:14px">Configurar meta →</button>
+    </div>`;
+  }
+  document.getElementById('progress-content').innerHTML = progHtml;
+
+  // Ventas summary
+  document.getElementById('ventas-summary').innerHTML = [
+    {l:'Invertido en productos',  v:fmt(T.totalCostSold), c:'var(--red)'},
+    {l:'Recaudado por ventas',    v:fmt(T.totalRevenue),  c:'var(--green)'},
+    {l:'Ganancia neta de ventas', v:fmt(T.netProfit),     c:'var(--gold2)', b:true},
+  ].map(r => `
+    <div class="irow">
+      <span class="irow-lbl">${r.l}</span>
+      <span style="font-size:13.5px;font-weight:${r.b?700:500};color:${r.c}">${r.v}</span>
+    </div>`).join('');
+
+  // Fondos summary
+  let fonds = data.previousFunds.map(f => `
+    <div class="irow">
+      <span class="irow-lbl">${f.year}</span>
+      <span style="font-size:13.5px;font-weight:500;color:var(--cream)">${fmt(f.amount)}</span>
+    </div>`).join('');
+  fonds += `<div class="irow" style="margin-top:4px">
+    <span style="font-size:13px;font-weight:700;color:var(--gold2)">Total histórico</span>
+    <span style="font-size:15px;font-weight:700;color:var(--gold2)">${fmt(T.prevTotal)}</span>
+  </div>`;
+  document.getElementById('fondos-summary').innerHTML = fonds;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER — ALUMNOS
+   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER — PRODUCTOS
+   ═══════════════════════════════════════════════════════════════════ */
+function renderProductos() {
+  const tbody = document.getElementById('products-tbody');
+  if (!data.products.length) {
+    tbody.innerHTML = `<tr class="no-data"><td colspan="9"><div class="empty"><div class="empty-ico">📦</div><p>No hay productos registrados aún</p></div></td></tr>`;
+    document.getElementById('product-kpis').innerHTML = '';
+    return;
+  }
+  tbody.innerHTML = data.products.map(p => {
+    const stock    = getStock(p.id);
+    const margin   = num(p.sellPrice) - num(p.buyPrice);
+    const invest   = num(p.qty) * num(p.buyPrice);
+    const potenti  = stock * num(p.sellPrice);
+    const stockBadge = stock === 0 ? 'br' : stock <= 3 ? 'by' : 'bg';
+    return `
+      <tr>
+        <td style="font-weight:600">${esc(p.name)}</td>
+        <td style="color:var(--muted2)">${p.qty}</td>
+        <td><span class="badge ${stockBadge}">${stock} uds.</span></td>
+        <td style="color:var(--red)">${fmt(p.buyPrice)}</td>
+        <td style="color:var(--green)">${fmt(p.sellPrice)}</td>
+        <td><span style="font-weight:700;color:${margin>=0?'var(--gold2)':'var(--red)'}">${fmt(margin)}</span></td>
+        <td style="color:var(--muted2)">${fmt(invest)}</td>
+        <td style="color:var(--blue)">${fmt(potenti)}</td>
+        <td><button class="btn-del" onclick="deleteProduct('${p.id}')">Eliminar</button></td>
+      </tr>`;
+  }).join('');
+
+  const totalInvest   = data.products.reduce((s,p) => s + num(p.qty)*num(p.buyPrice), 0);
+  const totalPotenti  = data.products.reduce((s,p) => s + getStock(p.id)*num(p.sellPrice), 0);
+  document.getElementById('product-kpis').innerHTML = [
+    {lbl:'Inversión total en productos',    val:fmt(totalInvest),  c:'#fca5a5'},
+    {lbl:'Stock restante (valor de venta)', val:fmt(totalPotenti), c:'#93c5fd'},
+    {lbl:'Tipos de productos',               val:data.products.length + ' tipos', c:'#e879a8'},
+  ].map(k => `
+    <div class="kpi">
+      <div class="kpi-line" style="background:${k.c}"></div>
+      <div class="kpi-lbl">${k.lbl}</div>
+      <div class="kpi-val" style="font-size:20px;color:${k.c}">${k.val}</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER — VENTAS
+   ═══════════════════════════════════════════════════════════════════ */
+function renderVentas() {
+  // Populate product selector
+  const sel = document.getElementById('v-product');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Seleccionar producto...</option>';
+  data.products.forEach(p => {
+    const stock = getStock(p.id);
+    const opt   = document.createElement('option');
+    opt.value   = p.id;
+    opt.textContent = `${p.name} — stock: ${stock} — venta: ${fmt(p.sellPrice)}`;
+    opt.disabled= stock === 0;
+    sel.appendChild(opt);
+  });
+  if (cur) sel.value = cur;
+
+  const tbody = document.getElementById('sales-tbody');
+  const T     = calcTotals();
+
+  if (!data.sales.length) {
+    tbody.innerHTML = `<tr class="no-data"><td colspan="8"><div class="empty"><div class="empty-ico">🧾</div><p>No hay ventas registradas aún</p></div></td></tr>`;
+    document.getElementById('sales-kpis').innerHTML = '';
+    return;
+  }
+
+  tbody.innerHTML = [...data.sales].reverse().map(sale => {
+    const p       = data.products.find(x => x.id === sale.productId);
+    const revenue = num(sale.qty) * num(p?.sellPrice);
+    const cost    = num(sale.qty) * num(p?.buyPrice);
+    const gain    = revenue - cost;
+    return `
+      <tr>
+        <td style="font-weight:600">${p ? esc(p.name) : '<span style="color:var(--muted)">Eliminado</span>'}</td>
+        <td>${sale.qty} uds.</td>
+        <td style="color:var(--red)">${fmt(p?.buyPrice)}</td>
+        <td style="color:var(--green)">${fmt(p?.sellPrice)}</td>
+        <td><span style="font-weight:700;color:var(--gold2)">${fmt(gain)}</span></td>
+        <td style="font-weight:600">${fmt(revenue)}</td>
+        <td style="color:var(--muted)">${sale.date}</td>
+        <td><button class="btn-del" onclick="deleteSale('${sale.id}')">Eliminar</button></td>
+      </tr>`;
+  }).join('');
+
+  document.getElementById('sales-kpis').innerHTML = [
+    {lbl:'Total ingresos por ventas', val:fmt(T.totalRevenue),  c:'#6ee7b7'},
+    {lbl:'Costo de lo vendido',       val:fmt(T.totalCostSold), c:'#fca5a5'},
+    {lbl:'Ganancia neta de ventas',   val:fmt(T.netProfit),     c:'#e879a8'},
+  ].map(k => `
+    <div class="kpi">
+      <div class="kpi-line" style="background:${k.c}"></div>
+      <div class="kpi-lbl">${k.lbl}</div>
+      <div class="kpi-val" style="color:${k.c}">${k.val}</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER — FONDOS ANTERIORES
+   ═══════════════════════════════════════════════════════════════════ */
+function renderFondos() {
+  const prevTotal = data.previousFunds.reduce((s,f) => s + num(f.amount), 0);
+  document.getElementById('prev-total-big').textContent = fmt(prevTotal);
+
+  // Sync inputs
+  document.getElementById('f-1').value = data.previousFunds[0].amount || '';
+  document.getElementById('f-2').value = data.previousFunds[1].amount || '';
+  document.getElementById('f-3').value = data.previousFunds[2].amount || '';
+
+  document.getElementById('fondos-kpis').innerHTML = data.previousFunds.map(f => `
+    <div class="kpi">
+      <div class="kpi-line" style="background:#a78bfa"></div>
+      <div class="kpi-lbl">${f.year}</div>
+      <div class="kpi-val">${fmt(f.amount)}</div>
+      <div class="kpi-sub">Fondo de ese año</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER — META
+   ═══════════════════════════════════════════════════════════════════ */
+function renderMeta() {
+  const T = calcTotals();
+  const goalInput = document.getElementById('goal-input');
+  if (document.activeElement !== goalInput)
+    goalInput.value = data.partyGoal || '';
+
+  // Sync fecha evento
+  const dateInput = document.getElementById('event-date-input');
+  if (dateInput && document.activeElement !== dateInput)
+    dateInput.value = data.eventDate || '';
+
+  const card = document.getElementById('meta-progress-card');
+  if (T.goal > 0) {
+    card.style.display = 'block';
+    document.getElementById('meta-progress-content').innerHTML = `
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:flex-end">
+        <div><div class="kpi-lbl">Recaudado</div><div class="big">${fmt(T.grandTotal)}</div></div>
+        <div style="text-align:right">
+          <div class="kpi-lbl">Meta</div>
+          <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--muted2)">${fmt(T.goal)}</div>
+        </div>
+      </div>
+      <div class="pbar" style="height:16px;margin-top:20px">
+        <div class="pfill" style="width:${T.progress}%;background:linear-gradient(90deg,${T.progColor}88,${T.progColor});box-shadow:0 0 16px ${T.progColor}55"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between">
+        <span style="font-size:14px;font-weight:700;color:${T.progColor}">${T.progress.toFixed(1)}%</span>
+        <span style="font-size:12px;color:var(--muted)">Faltan ${fmt(T.remaining)}</span>
+      </div>`;
+
+    document.getElementById('meta-extra').innerHTML = [
+      {l:'Fondos de años anteriores', v:fmt(T.prevTotal),    c:'var(--purple)'},
+      {l:'Ganancia de ventas',        v:fmt(T.netProfit),    c:'var(--green)'},
+    ].map(r => `
+      <div class="ibox">
+        <div class="kpi-lbl">${r.l}</div>
+        <div style="font-size:20px;font-family:'Playfair Display',serif;font-weight:700;color:${r.c};margin-top:4px">${r.v}</div>
+      </div>`).join('');
+  } else {
+    card.style.display = 'none';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER ALL
+   ═══════════════════════════════════════════════════════════════════ */
+function renderAll() {
+  renderResumen();
+  renderCountdown();
+  renderBalance();
+  renderProductos();
+  renderVentas();
+  renderFondos();
+  renderMeta();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACTIONS — PRODUCTOS
+   ═══════════════════════════════════════════════════════════════════ */
+function addProduct() {
+  const name     = document.getElementById('p-name').value.trim();
+  const qty      = document.getElementById('p-qty').value;
+  const buyPrice = document.getElementById('p-buy').value;
+  const sellPrice= document.getElementById('p-sell').value;
+  if (!name || !qty || !buyPrice || !sellPrice) { toast('Completa todos los campos', 'err'); return; }
+  data.products.push({ id: uid(), name, qty, buyPrice, sellPrice });
+  document.getElementById('p-name').value  = '';
+  document.getElementById('p-qty').value   = '';
+  document.getElementById('p-buy').value   = '';
+  document.getElementById('p-sell').value  = '';
+  saveDataDebounced(); renderAll(); toast('Producto agregado ✓');
+}
+function deleteProduct(id) {
+  confirm2('¿Eliminar este producto y todas sus ventas asociadas?', () => {
+    data.products = data.products.filter(p => p.id !== id);
+    data.sales    = data.sales.filter(s => s.productId !== id);
+    saveDataDebounced(); renderAll(); toast('Producto eliminado');
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACTIONS — VENTAS
+   ═══════════════════════════════════════════════════════════════════ */
+function addSale() {
+  const productId= document.getElementById('v-product').value;
+  const qty      = parseFloat(document.getElementById('v-qty').value) || 0;
+  const date     = document.getElementById('v-date').value;
+  if (!productId || !qty) { toast('Selecciona producto y cantidad', 'err'); return; }
+  const stock    = getStock(productId);
+  if (qty > stock) { toast(`Stock insuficiente — quedan ${stock} unidades`, 'err'); return; }
+  if (qty <= 0)    { toast('La cantidad debe ser mayor a 0', 'err'); return; }
+  data.sales.push({ id: uid(), productId, qty, date });
+  document.getElementById('v-product').value = '';
+  document.getElementById('v-qty').value     = '';
+  saveDataDebounced(); renderAll(); toast('Venta registrada ✓');
+}
+function deleteSale(id) {
+  confirm2('¿Eliminar esta venta del registro?', () => {
+    data.sales = data.sales.filter(s => s.id !== id);
+    saveDataDebounced(); renderAll(); toast('Venta eliminada');
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACTIONS — FONDOS ANTERIORES
+   ═══════════════════════════════════════════════════════════════════ */
+function saveFund(index, val) {
+  data.previousFunds[index].amount = val;
+  saveDataDebounced();
+  const prev = data.previousFunds.reduce((s,f) => s + num(f.amount), 0);
+  const el   = document.getElementById('prev-total-big');
+  if (el) el.textContent = fmt(prev);
+  renderResumen(); renderMeta();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACTIONS — META
+   ═══════════════════════════════════════════════════════════════════ */
+function saveGoal(val) {
+  data.partyGoal = parseFloat(val) || 0;
+  saveDataDebounced(); renderResumen(); renderMeta(); renderBalance();
+}
+
+function saveEventDate(val) {
+  data.eventDate = val;
+  saveDataDebounced(); renderCountdown(); renderMeta();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INIT — iniciar la aplicación (luego de elegir/abrir archivo)
+   ═══════════════════════════════════════════════════════════════════ */
+function iniciarApp() {
+  document.getElementById('v-date').value = new Date().toLocaleDateString('es-CL');
+  renderAll();
+  // Reloj en tiempo real
+  actualizarReloj();
+  setInterval(() => {
+    actualizarReloj();
+    tickCountdown();
+  }, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ARRANQUE — cargar localStorage y arrancar directamente
+   ═════════════════════════════════════════�
